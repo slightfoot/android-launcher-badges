@@ -1,4 +1,4 @@
-## Android Luncher Badges (without TouchWiz)
+## Stock Android Launcher Badges (without TouchWiz)
 
 Note: I can take a few seconds for the Launcher to detect the icon change.
 
