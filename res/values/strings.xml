@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+	<string name="app_name">Android Launcher Badges</string>
+	
+	<string name="increment">Increment</string>
+	<string name="decrement">Decrement</string>
+	
+</resources>
