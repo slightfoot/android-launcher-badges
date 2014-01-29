@@ -1,24 +1,43 @@
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
 	android:layout_gravity="center"
-	android:orientation="horizontal"
 	tools:context=".MainActivity"
 	>
-	<Button
-		android:id="@+id/increment"
+	<ImageView
+		android:id="@+id/icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="@string/increment"
-		tools:ignore="ButtonStyle"
+		android:layout_marginBottom="16dp"
+		android:layout_centerHorizontal="true"
+		android:src="@drawable/ic_launcher"
+		android:contentDescription="@string/app_name"
 		/>
-	<Button
-		android:id="@+id/decrement"
+	<LinearLayout
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="@string/decrement"
-		tools:ignore="ButtonStyle"
-		/>
-</LinearLayout>
+		android:layout_below="@+id/icon"
+		android:orientation="horizontal"
+		>
+		<Button
+			android:id="@+id/increment"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="4dp"
+			android:drawableTop="@drawable/ic_action_arrow_top_dark"
+			android:text="@string/increment"
+			tools:ignore="ButtonStyle"
+			/>
+		<Button
+			android:id="@+id/decrement"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="4dp"
+			android:drawableTop="@drawable/ic_action_arrow_bottom_dark"
+			android:text="@string/decrement"
+			tools:ignore="ButtonStyle"
+			/>
+	</LinearLayout>
+</RelativeLayout>

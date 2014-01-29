@@ -78,29 +78,41 @@ public final class AppBadge
 		return sInstance;
 	}
 	
-	public static void incrementBadgeCount(Context context)
+	public static boolean incrementBadgeCount(Context context)
 	{
-		getInstance(context).incrementBadgeCount();
+		return getInstance(context).incrementBadgeCount();
 	}
 	
-	public static void decrementBadgeCount(Context context)
+	public static boolean decrementBadgeCount(Context context)
 	{
-		getInstance(context).decrementBadgeCount();
+		return getInstance(context).decrementBadgeCount();
 	}
 	
+	public static Drawable getCurrentBadge(Context context)
+	{
+		return getInstance(context).getCurrentBadge();
+	}
+	
+	@SuppressLint("NewApi")
 	public static void updateActivityIcon(Activity activity)
 	{
-		getInstance(activity).updateActivity(activity);
+		Drawable icon = getInstance(activity).getCurrentBadge();
+		if(activity.getWindow().hasFeature(Window.FEATURE_LEFT_ICON)){
+			activity.setFeatureDrawable(Window.FEATURE_LEFT_ICON, icon);
+		}
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
+			activity.getActionBar().setIcon(icon);
+		}
 	}
 	
-	public void incrementBadgeCount()
+	public boolean incrementBadgeCount()
 	{
-		updateBadgeCount(+1);
+		return updateBadgeCount(+1);
 	}
 	
-	public void decrementBadgeCount()
+	public boolean decrementBadgeCount()
 	{
-		updateBadgeCount(-1);
+		return updateBadgeCount(-1);
 	}
 	
 	private int getCurrentBadgeCount()
@@ -108,18 +120,11 @@ public final class AppBadge
 		return mSharedPrefs.getInt(KEY_BADGE_COUNT, 0);
 	}
 	
-	@SuppressLint("NewApi")
-	public synchronized void updateActivity(Activity activity)
+	public synchronized Drawable getCurrentBadge()
 	{
 		try{
-			Drawable icon = mAppContext.getPackageManager()
+			return mAppContext.getPackageManager()
 				.getActivityIcon(mBadges.get(getCurrentBadgeCount()));
-			if(activity.getWindow().hasFeature(Window.FEATURE_LEFT_ICON)){
-				activity.setFeatureDrawable(Window.FEATURE_LEFT_ICON, icon);
-			}
-			if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
-				activity.getActionBar().setIcon(icon);
-			}
 		}
 		catch(NameNotFoundException e){
 			throw new RuntimeException(e);
